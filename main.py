@@ -85,7 +85,7 @@
 
 tracker = {'Project A' : 4000}
 
-def add_project(name, budget = 0):
+def add_project(name, budget=0):
     tracker[name] = budget
 
 while True:
@@ -94,7 +94,14 @@ while True:
 
     if choice == 'view':
         for k,v in tracker.items(): print(f"{k}: ${v}")
-    elif choice == 'new':
-        name = input('Please enter project name')
+    elif choice == 'add':
+        name = input('Please enter project name').title()
         add_project(name)
+    elif choice == 'allocate':
+        pass
+    elif choice == 'spend':
+        pass
+    elif choice == 'exit':
+        break
+    else: print("Sorry, didn't understand your input")
 
