@@ -86,19 +86,39 @@
 tracker = {'Project A' : 4000}
 
 def add_project(name, budget=0):
-    tracker[name] = budget
+    if name in tracker:
+        print("Sorry this project already exists")
+    else: tracker[name] = budget
+
+def delete_project(name):
+    if name in tracker:
+        confirm = input("Are you sure you want to delete this project. It will remove all funds. Please type 'yes' to confirm or 'no' to exit").lower()
+        if confirm == "yes":
+            del tracker[name]
+            print(f"{name} has been deleted")
+
+def allocate(name, amount):
+    if name in tracker:
+        tracker[name] += amount
+ 
 
 while True:
     
-    choice = str(input("What would you like to do? Choices: 'view', 'add', 'allocate', 'spend'?, 'exit' \n")).lower()
+    choice = str(input("What would you like to do? Choices: 'view', 'add', 'delete', 'allocate', 'spend'?, 'exit' \n")).lower()
 
     if choice == 'view':
         for k,v in tracker.items(): print(f"{k}: ${v}")
     elif choice == 'add':
         name = input('Please enter project name').title()
         add_project(name)
+    elif choice == 'delete':
+        name = input('Please enter project name. Warning this will delete the project and budget').title()
+        delete_project(name)
     elif choice == 'allocate':
-        pass
+        name = input('Which project do you want to allocate funds to?').title()
+        amount = int(input('How much do you want to add to the project?'))
+        allocate(name,amount)
+
     elif choice == 'spend':
         pass
     elif choice == 'exit':
